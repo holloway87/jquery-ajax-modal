@@ -1,0 +1,26 @@
+{
+	"name": "holloway87/jquery-ajax-modal",
+	"type": "component",
+	"description": "jQuery plugin to load modal via ajax resource",
+	"keywords": ["jquery", "plugin", "bootstrap", "modal"],
+	"homepage": "https://github.com/holloway87/jquery-ajax-modal",
+	"license": "WTFPL",
+	"authors": [
+		{
+			"name": "Thomas Rudolph",
+			"email": "me@holloway-web.de"
+		}
+	],
+	"require": {
+		"robloach/component-installer": "~0.0.12",
+		"components/jquery": "~1.11",
+		"components/bootstrap": "~3.3"
+	},
+	"extra": {
+		"component": {
+			"scripts": [
+				"jquery.hwAjaxModal.js"
+			]
+		}
+	}
+}
