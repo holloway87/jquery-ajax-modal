@@ -1,0 +1,17 @@
+{
+	"name": "jquery-ajax-modal",
+	"repo": "holloway87/jquery-ajax-modal",
+	"version": "1.11.2",
+	"description": "jQuery plugin to load modal via ajax resource",
+	"keywords": [
+		"jquery",
+		"plugin",
+		"bootstrap",
+		"modal"
+	],
+	"main": "jquery.hwAjaxModal.js",
+	"scripts": [
+		"jquery.hwAjaxModal.js"
+	],
+	"license": "WTFPL"
+}
