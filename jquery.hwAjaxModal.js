@@ -28,10 +28,33 @@
     /**
      * Default options.
      *
-     * @type {{bootstrap: {}}}
+     * @type {{bootstrap: {}, loader: string}}
      */
     HwAjaxModal.DEFAULTS = {
-        'bootstrap': {}
+        'bootstrap': {},
+        'loader': '<div class="ajax-loader"><h5>Please wait...</h5></div>'
+    };
+
+    /**
+     * Fires the error event if the ajax request failed.
+     *
+     * @param xhr
+     */
+    HwAjaxModal.prototype.fireErrorEvent = function (xhr) {
+        var event = jQuery.Event('error.' + HwAjaxModal.DATA_KEY);
+        event.xhr = xhr;
+
+        this.removeChildren();
+        this.removeLoader();
+        this.$element.modal('hide');
+        this.$element.trigger(event);
+    };
+
+    /**
+     * Hides the loader.
+     */
+    HwAjaxModal.prototype.hideLoader = function () {
+        this.$element.modal('hide');
     };
 
     /**
@@ -42,6 +65,7 @@
      * @returns {*}
      */
     HwAjaxModal.prototype.load = function (url, data) {
+        this.showLoader();
         $.get(url, data, $.proxy(this.setContent, this))
             .fail($.proxy(this.fireErrorEvent, this));
     };
@@ -56,11 +80,24 @@
             if ($this.hasClass('modal-backdrop')) {
                 return;
             }
+            // cancel if it's the loader
+            if (true === $this.data('loader.' + HwAjaxModal.DATA_KEY)) {
+                return;
+            }
 
             $this.fadeOut('fast', function () {
                 $(this).remove();
             });
         });
+    };
+
+    /**
+     * Removes the loader.
+     */
+    HwAjaxModal.prototype.removeLoader = function () {
+        if (this.$loader) {
+            this.$loader.fadeOut('fast', function () {$(this).remove();});
+        }
     };
 
     /**
@@ -71,6 +108,7 @@
      * @returns {*}
      */
     HwAjaxModal.prototype.request = function (url, data) {
+        this.showLoader();
         $.post(url, data, $.proxy(this.setContent, this))
             .fail($.proxy(this.fireErrorEvent, this));
     };
@@ -90,6 +128,7 @@
         var event;
         var $data;
         this.removeChildren();
+        this.removeLoader();
 
         if ('string' != typeof data) {
             event = jQuery.Event('otherdata.' + HwAjaxModal.DATA_KEY);
@@ -108,16 +147,35 @@
     };
 
     /**
-     * Fires the error event if the ajax request failed.
+     * Shows the loader.
      *
-     * @param xhr
+     * Creates it if it doesn't exist yet.
+     * If no loader is configured, nothing will happen.
      */
-    HwAjaxModal.prototype.fireErrorEvent = function (xhr) {
-        var event = jQuery.Event('error.' + HwAjaxModal.DATA_KEY);
-        event.xhr = xhr;
+    HwAjaxModal.prototype.showLoader = function () {
+        if (!this.options.loader) {
+            return;
+        }
+        this.removeChildren();
 
-        this.$element.modal('hide');
-        this.$element.trigger(event);
+        var loaderLoaded = false;
+        this.$element.children().each(function () {
+            if (true === $(this).data('loader.' + HwAjaxModal.DATA_KEY)) {
+                loaderLoaded = true;
+            }
+        });
+
+        if (!loaderLoaded) {
+            this.$loader = $(this.options.loader);
+            this.$loader.data('loader.' + HwAjaxModal.DATA_KEY, true);
+            this.$loader.hide();
+            this.$element.append(this.$loader);
+            this.$loader.fadeIn('fast');
+        }
+
+        if (!this.$element.hasClass('in')) {
+            this.$element.modal('show');
+        }
     };
 
     /**
