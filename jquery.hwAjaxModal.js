@@ -132,7 +132,7 @@
 
         if ('string' != typeof data) {
             event = jQuery.Event('otherdata.' + HwAjaxModal.DATA_KEY);
-            event.data = data;
+            event.ajaxdata = data;
             this.$element.trigger(event);
             this.$element.modal('hide');
             return;
