@@ -1,0 +1,27 @@
+{
+  "name": "hw-ajax-modal",
+  "homepage": "https://github.com/holloway87/jquery-ajax-modal",
+  "description": "jQuery plugin to load modal via ajax resource",
+  "main": "jquery.hwAjaxModal.js",
+  "keywords": [
+    "jquery",
+    "plugin",
+    "bootstrap",
+    "modal"
+  ],
+  "authors": [
+    "Thomas Rudolph <me@holloway-web.de>"
+  ],
+  "license": "WTFPL",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": ">=1.7",
+    "bootstrap": ">=3.0"
+  }
+}

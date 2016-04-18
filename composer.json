@@ -1,5 +1,5 @@
 {
-	"name": "holloway87/jquery-ajax-modal",
+	"name": "holloway87/hw-ajax-modal",
 	"type": "component",
 	"description": "jQuery plugin to load modal via ajax resource",
 	"keywords": ["jquery", "plugin", "bootstrap", "modal"],
