@@ -66,8 +66,23 @@
      */
     HwAjaxModal.prototype.load = function (url, data) {
         this.showLoader();
-        $.get(url, data, $.proxy(this.setContent, this))
-            .fail($.proxy(this.fireErrorEvent, this));
+
+        var xhr;
+        var callback = $.proxy(this.setContent, this);
+        if ('function' == typeof FormData && data instanceof FormData) {
+            xhr = $.ajax({
+                'url': url,
+                'type': 'GET',
+                'data': data,
+                'processData': false,
+                'contentType': false,
+                'success': callback
+            });
+        } else {
+            xhr = $.get(url, data, callback);
+        }
+
+        xhr.fail($.proxy(this.fireErrorEvent, this));
     };
 
     /**
@@ -109,8 +124,23 @@
      */
     HwAjaxModal.prototype.request = function (url, data) {
         this.showLoader();
-        $.post(url, data, $.proxy(this.setContent, this))
-            .fail($.proxy(this.fireErrorEvent, this));
+
+        var xhr;
+        var callback = $.proxy(this.setContent, this);
+        if ('function' == typeof FormData && data instanceof FormData) {
+            xhr = $.ajax({
+                'url': url,
+                'type': 'POST',
+                'data': data,
+                'processData': false,
+                'contentType': false,
+                'success': callback
+            });
+        } else {
+            xhr = $.post(url, data, callback);
+        }
+
+        xhr.fail($.proxy(this.fireErrorEvent, this));
     };
 
     /**
