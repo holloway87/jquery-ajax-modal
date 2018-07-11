@@ -1,0 +1,24 @@
+{
+  "name": "hw-ajax-modal",
+  "version": "0.0.6",
+  "description": "jQuery plugin to load modal via ajax resource",
+  "main": "jquery.hwAjaxModal.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/holloway87/jquery-ajax-modal.git"
+  },
+  "keywords": [
+    "jquery",
+    "ajax",
+    "modal"
+  ],
+  "author": "Thomas Rudolph <me@holloway-web.de>",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/holloway87/jquery-ajax-modal/issues"
+  },
+  "homepage": "https://github.com/holloway87/jquery-ajax-modal#readme"
+}
